@@ -16,7 +16,7 @@
       <p>From Vuex: {{ this.$store.getters.getAutor }}</p>
       <!-- Componentes -->
 
-
+      <p>Texto nuevo</p>
     </ion-content>
   </ion-page>
 </template>
