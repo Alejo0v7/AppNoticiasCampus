@@ -13,18 +13,28 @@
       </ion-header>
 
       <h2>Calendario</h2>
+      <h2>prueba de ale</h2>
       <!-- Componentes -->
-      
     </ion-content>
   </ion-page>
 </template>
 
-<script >
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+<script>
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+} from "@ionic/vue";
 export default {
-  name:'Tab2Page',
-  components:{
-    IonPage, IonHeader, IonToolbar, IonTitle, IonContent 
-  }
-}
+  name: "Tab2Page",
+  components: {
+    IonPage,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+  },
+};
 </script>
