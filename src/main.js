@@ -27,8 +27,9 @@ import './theme/variables.css';
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  .use(store);
-  
+  .use(store)
+  app.config.globalProperties.globalVar = 'http://127.0.0.1:8000/api/';
+
 router.isReady().then(() => {
   app.mount('#app');
 });

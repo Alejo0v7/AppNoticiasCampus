@@ -16,17 +16,33 @@
       <p>From Vuex: {{ this.$store.getters.getAutor }}</p>
       <!-- Componentes -->
 
-      <p>Texto nuevo</p>
+      <!-- Variable global -->
+      <p>Variable global para api:</p>
+      <p><b>{{ globalVar }}</b></p>
     </ion-content>
   </ion-page>
 </template>
 
 <script >
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import axios  from "axios";
+
 export default {
   name:'Tab1Page',
   components:{
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent 
+  },
+  created(){
+
+    /* Ejemplo usando variable global*/
+    axios.get(this.globalVar+'publicacion/index')
+    .then(response =>{
+        let data = response.data.data
+        console.log(data)
+    })
+    .catch(error => console.log('Error: '+error))
+
   }
+
 }
 </script>
