@@ -19,8 +19,19 @@
                 <ion-label>Usuarios y roles</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
-                <ion-button>Gestionar Usuarios</ion-button>
-                <ion-button>Gestionar Roles</ion-button>
+                <ion-button
+                  expand="block" 
+                  shape="round" 
+                  @click="this.$router.push({ path: '/ViewRol' })">
+                  Gestionar Roles
+                </ion-button>
+                <ion-button 
+                  expand="block" 
+                  shape="round" 
+                  @click="this.$router.push({ path: '/ViewUsuario' })">
+                  Gestionar Usuarios
+                </ion-button>
+                
             </div>
             </ion-accordion>
             <ion-accordion value="second">
@@ -28,9 +39,19 @@
                 <ion-label>Noticias y eventos</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
-                <ion-button>Gestionar Categorias</ion-button>
-                <ion-button>Gestionar Tipos de Publicación</ion-button>
-                <ion-button>Gestionar Publicaciones</ion-button>
+                <ion-button
+                  expand="block" 
+                  shape="round" 
+                  >Gestionar Categorias
+                </ion-button>
+                <ion-button
+                  expand="block" 
+                  shape="round" 
+                  >Gestionar Tipos de Publicación</ion-button>
+                <ion-button
+                  expand="block" 
+                  shape="round" 
+                >Gestionar Publicaciones</ion-button>
             </div>
             </ion-accordion>
 

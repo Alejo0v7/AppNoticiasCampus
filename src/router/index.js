@@ -6,6 +6,10 @@ import Tab2Page from '../views/Tab2Page.vue';
 import Tab3Page from '../views/Tab3Page.vue';
 import Tab4Page from '../views/Tab4Page.vue';
 
+import ViewRol from '../views/CRUD/ViewRol.vue';
+import ViewUsuario from '../views/CRUD/ViewUsuario.vue';
+
+
 
 const routes/* : Array<RouteRecordRaw> */ = [
   {
@@ -37,7 +41,17 @@ const routes/* : Array<RouteRecordRaw> */ = [
         component: Tab4Page
       }
     ]
-  }
+  },
+  /* Rutas de ADMIN */
+  {
+    path: '/ViewRol',
+    component: ViewRol
+  },
+  {
+    path: '/ViewUsuario',
+    component: ViewUsuario
+  },
+
 ]
 
 const router = createRouter({
