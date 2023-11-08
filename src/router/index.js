@@ -8,6 +8,7 @@ import Tab4Page from '../views/Tab4Page.vue';
 
 import ViewRol from '../views/CRUD/ViewRol.vue';
 import ViewUsuario from '../views/CRUD/ViewUsuario.vue';
+import ViewTipoPublicacion from '../views/CRUD/ViewTipoPublicacion.vue';
 
 
 
@@ -50,6 +51,10 @@ const routes/* : Array<RouteRecordRaw> */ = [
   {
     path: '/ViewUsuario',
     component: ViewUsuario
+  },
+  {
+    path: '/ViewTipoPublicacion',
+    component: ViewTipoPublicacion
   },
 
 ]
