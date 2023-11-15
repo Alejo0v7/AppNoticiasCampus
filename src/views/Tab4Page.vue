@@ -39,7 +39,9 @@
             <ion-label>Noticias y eventos</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">
-            <ion-button expand="block" shape="round"
+            <ion-button 
+              expand="block" 
+              shape="round"
               >Gestionar Categorias
             </ion-button>
             <ion-button
@@ -48,7 +50,10 @@
               @click="this.$router.push({ path: '/ViewTipoPublicacion' })"
               >Gestionar Tipos de Publicación</ion-button
             >
-            <ion-button expand="block" shape="round"
+            <ion-button 
+              expand="block" 
+              shape="round"
+              @click="this.$router.push({ path: '/ViewPublicacion' })"
               >Gestionar Publicaciones</ion-button
             >
           </div>
