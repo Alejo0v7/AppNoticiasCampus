@@ -40,8 +40,11 @@
           </ion-item>
           <div class="ion-padding" slot="content">
             <ion-button 
+              
               expand="block" 
+              
               shape="round"
+              @click="this.$router.push({ path: '/ViewCategoria' })"
               >Gestionar Categorias
             </ion-button>
             <ion-button
