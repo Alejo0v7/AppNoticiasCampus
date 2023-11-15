@@ -62,7 +62,7 @@ const routes/* : Array<RouteRecordRaw> */ = [
   {
     path: '/ViewCategoria',
     component: ViewCategoria
-  }
+  },
   {
     path: '/ViewPublicacion',
     component: ViewPublicacion
