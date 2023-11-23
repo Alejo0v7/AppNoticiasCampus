@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="">
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="2">
@@ -37,7 +37,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-align-items-center">
-        <ion-col size="10">
+        <ion-col size="12">
           <!-- Boton de comentarios -->
           <ion-button
             @click="getPublicacion(id)"
@@ -53,7 +53,7 @@
         </ion-col>
         <ion-col size="2">
           <!-- Boton de compartir -->
-          <ion-button
+          <!-- <ion-button
             @click=""
             size="small"
             shape="round"
@@ -62,7 +62,7 @@
             expand="block"
           >
             <ion-icon slot="icon-only" :icon="arrowRedoOutline"></ion-icon>
-          </ion-button>
+          </ion-button> -->
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -135,7 +135,7 @@
               >
               </ion-input>
             </ion-col>
-            <ion-col size="10">
+            <ion-col size="12">
               <!-- Boton de comentarios -->
               <ion-button
                 size="small"
@@ -151,7 +151,7 @@
             </ion-col>
             <ion-col size="2">
               <!-- Boton de compartir -->
-              <ion-button
+              <!-- <ion-button
                 @click=""
                 size="small"
                 shape="round"
@@ -160,7 +160,7 @@
                 expand="block"
               >
                 <ion-icon slot="icon-only" :icon="arrowRedoOutline"></ion-icon>
-              </ion-button>
+              </ion-button> -->
             </ion-col>
           </ion-row>
           <ion-row>
@@ -479,6 +479,6 @@ export default {
   padding: 4%;
   border-radius: 15px;
   box-shadow: 0px 0px 20px -10px;
-  color: rgb(97, 97, 97);
+  /* color: rgb(97, 97, 97); */
 }
 </style>

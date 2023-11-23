@@ -108,7 +108,7 @@ const routes /* : Array<RouteRecordRaw> */ = [
 
           if (res) {
             let rol = await validarRol();
-            if (rol == "Admin") {
+            if (rol == "Administrador") {
               next();
             } else {
               next("/tabs/tab1");
@@ -129,7 +129,7 @@ const routes /* : Array<RouteRecordRaw> */ = [
 
       if (res) {
         let rol = await validarRol();
-        if (rol == "Admin") {
+        if (rol == "Administrador") {
           next();
         } else {
           next("/tabs/tab1");
@@ -147,7 +147,7 @@ const routes /* : Array<RouteRecordRaw> */ = [
 
       if (res) {
         let rol = await validarRol();
-        if (rol == "Admin") {
+        if (rol == "Administrador") {
           next();
         } else {
           next("/tabs/tab1");
@@ -165,7 +165,7 @@ const routes /* : Array<RouteRecordRaw> */ = [
 
       if (res) {
         let rol = await validarRol();
-        if (rol == "Admin") {
+        if (rol == "Administrador") {
           next();
         } else {
           next("/tabs/tab1");
@@ -183,7 +183,7 @@ const routes /* : Array<RouteRecordRaw> */ = [
 
       if (res) {
         let rol = await validarRol();
-        if (rol == "Admin") {
+        if (rol == "Administrador") {
           next();
         } else {
           next("/tabs/tab1");
@@ -201,7 +201,7 @@ const routes /* : Array<RouteRecordRaw> */ = [
 
       if (res) {
         let rol = await validarRol();
-        if (rol == "Admin") {
+        if (rol == "Administrador") {
           next();
         } else {
           next("/tabs/tab1");

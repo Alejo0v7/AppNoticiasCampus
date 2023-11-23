@@ -2,6 +2,9 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/" />
+        </ion-buttons>
         <ion-title>Registro</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -68,7 +71,6 @@
               expand="block"
               @click="register"
             >
-              <ion-icon slot="start" :icon="checkmarkOutline"></ion-icon>
               Registrarse
             </ion-button>
           </ion-col>
@@ -81,13 +83,11 @@
       :message="toastMessage"
       :is-open="toastState"
       @didDismiss="toastState = false"
-      :icon="informationCircleOutline"
     ></ion-toast>
   </ion-page>
 </template>
 
 <script>
-import { checkmarkOutline } from "ionicons/icons";
 import {
   IonPage,
   IonContent,
@@ -101,6 +101,8 @@ import {
   IonButton,
   IonInput,
   IonToast,
+  IonButtons,
+  IonBackButton,
 } from "@ionic/vue";
 
 import axios from "axios";
@@ -120,10 +122,11 @@ export default {
     IonButton,
     IonInput,
     IonToast,
+    IonButtons,
+    IonBackButton,
   },
   data() {
     return {
-      checkmarkOutline,
       toastState: false,
       toastMessage: null,
       usuario: {},
@@ -131,7 +134,7 @@ export default {
   },
   methods: {
     register() {
-      this.usuario.tipo_usuario = 41;
+      this.usuario.tipo_usuario = 2;
       axios
         .post(this.globalVar + "usuario/store", this.usuario)
         .then((response) => {

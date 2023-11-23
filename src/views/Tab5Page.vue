@@ -2,12 +2,12 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Noticias y Eventos Destacados</ion-title>
+        <ion-title>Destacados</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true" class="ion-padding">
       <div v-if="show">
-        <h2>No Hay Noticias y Eventos Destacados</h2>
+        <h2>No Hay Destacados</h2>
       </div>
       <!-- Card -->
       <div v-for="(post, i) in data" :key="i">

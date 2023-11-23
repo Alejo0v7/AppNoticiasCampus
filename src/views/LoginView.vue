@@ -53,7 +53,6 @@
               expand="block"
               @click="login"
             >
-              <ion-icon slot="start" :icon="checkmarkOutline"></ion-icon>
               Iniciar Sesión
             </ion-button>
 
@@ -63,7 +62,6 @@
               expand="block"
               @click="Registrarse"
             >
-              <ion-icon slot="start" :icon="checkmarkOutline"></ion-icon>
               Registrarse
             </ion-button>
           </ion-col>
@@ -76,13 +74,11 @@
       :message="toastMessage"
       :is-open="toastState"
       @didDismiss="toastState = false"
-      :icon="informationCircleOutline"
     ></ion-toast>
   </ion-page>
 </template>
 
 <script>
-import { checkmarkOutline } from "ionicons/icons";
 import {
   IonPage,
   IonContent,
@@ -118,7 +114,6 @@ export default {
   },
   data() {
     return {
-      checkmarkOutline,
       toastState: false,
       toastMessage: null,
       usuario: {},

@@ -2,9 +2,8 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-title class="ion-text-center" style="color: #2c3e50"
-          >Eventos</ion-title
-        >
+        <br />
+        <ion-title class="ion-text-center">Eventos</ion-title>
       </ion-col>
     </ion-row>
 
@@ -12,23 +11,18 @@
       <ion-col>
         <ion-list lines="full">
           <ion-item v-for="(data, i) in respuesta" :key="i">
-            <ion-card class="custom-card" v-if="data.visible">
-              <ion-card-header
-                class="ion-text-center"
-                style="background-color: #8e44ad"
-              >
-                <ion-card-title style="color: #ffffff">{{
-                  data.titulo
-                }}</ion-card-title>
-                <ion-card-subtitle style="color: #ecf0f1">{{
-                  data.subtitulo
-                }}</ion-card-subtitle>
-                <ion-card-subtitle style="color: #ecf0f1">{{
-                  data.fecha
-                }}</ion-card-subtitle>
+            <ion-card
+              class="custom-card"
+              v-if="data.visible && data.tipo_publicacion == 'Evento'"
+            >
+              <ion-card-header class="ion-text-center">
+                <ion-card-title>{{ data.titulo }}</ion-card-title>
+                <ion-card-subtitle>{{ data.subtitulo }}</ion-card-subtitle>
+                <ion-card-subtitle>{{ data.fecha }}</ion-card-subtitle>
               </ion-card-header>
 
-              <ion-card-content style="color: #2c3e50">
+              <ion-card-content class="ion-text-center">
+                <br />
                 {{ data.descripcion }}
               </ion-card-content>
             </ion-card>
@@ -107,13 +101,15 @@ export default {
 </script>
 
 <style scoped>
-.custom-card {
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+ion-card {
+  width: 100%;
 }
-
-.custom-card:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.custom-card {
+  box-shadow: 0px 0px 20px -10px;
+  border-radius: 15px;
+  width: 100%;
+}
+ion-card-header {
+  background-color: 255, 241, 242;
 }
 </style>
