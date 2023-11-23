@@ -2,6 +2,9 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/tabs/tab4" />
+        </ion-buttons>
         <ion-title> Tipos de Publicaciones </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -21,6 +24,8 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
+  IonBackButton,
+  IonButtons,
 } from "@ionic/vue";
 import AgregarTipoPublicacion from "../../components/tipoPublicacion/AgregarTipoPublicacion.vue";
 import ListaTipoPublicacion from "../../components/tipoPublicacion/ListaTipoPublicacion.vue";
@@ -36,6 +41,8 @@ export default {
     IonTitle,
     IonContent,
     ListaTipoPublicacion,
+    IonBackButton,
+    IonButtons,
   },
   data() {
     return {

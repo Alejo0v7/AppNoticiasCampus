@@ -7,82 +7,82 @@
     </ion-row>
 
     <ion-row class="card" v-for="(data, i) in respuesta" :key="i">
-      <div >
+      <div>
         <h3>Título</h3>
         <p>{{ data.titulo }}</p>
         <h3>Subtitulo</h3>
         <p>{{ data.subtitulo }}</p>
         <h4>Acciones</h4>
-          <!-- Componentes -->
-          <VerButton :id=data.id />
-          <EditarButton :id=data.id />
-          <EliminarButton :id=data.id />
+        <!-- Componentes -->
+        <VerButton :id="data.id" />
+        <EditarButton :id="data.id" />
+        <EliminarButton :id="data.id" />
       </div>
     </ion-row>
   </ion-grid>
 </template>
 
 <script>
-import {
-
-  IonContent,
-  IonGrid,
-  IonCol,
-  IonRow,
-
-} from "@ionic/vue";
+import { IonContent, IonGrid, IonCol, IonRow } from "@ionic/vue";
 
 import EditarButton from "./EditarButton.vue";
 import EliminarButton from "./EliminarButton.vue";
 import VerButton from "./VerButton.vue";
 
-
 import axios from "axios";
 export default {
   name: "ListaPublicacion",
   components: {
-
     IonContent,
     IonGrid,
     IonCol,
     IonRow,
-
-    EditarButton, EliminarButton, VerButton
+    EditarButton,
+    EliminarButton,
+    VerButton,
   },
   data() {
     return {
       respuesta: [],
+      config: {},
     };
   },
   methods: {
+    async getToken() {
+      let token = await this.$storage.get("token");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      this.getData();
+    },
     getData() {
       this.respuesta = [];
-      axios.get(this.globalVar + "publicacion/index").then((response) => {
-        let res = response.data;
-        if (res.code == 200) {
-          this.respuesta = res.data;
-          console.log(this.respuesta);
-        }
-      });
+      axios
+        .get(this.globalVar + "publicacion/index", this.config)
+        .then((response) => {
+          let res = response.data;
+          if (res.code == 200) {
+            this.respuesta = res.data.sort((a, b) => {
+              return new Date(a.fecha) - new Date(b.fecha);
+            });
+          }
+        });
     },
-    
   },
   mounted() {
-    this.getData();
-  },
-  ionViewWillEnter() {
-    this.getData();
+    this.getToken();
   },
 };
 </script>
 
 <style>
-.card{
+.card {
   margin: 4% 0%;
   padding: 4%;
   border-radius: 15px;
-  box-shadow: 0px 0px 20px -10px ;
+  box-shadow: 0px 0px 20px -10px;
   color: rgb(97, 97, 97);
 }
-
 </style>

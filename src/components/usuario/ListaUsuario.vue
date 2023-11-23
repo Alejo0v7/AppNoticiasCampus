@@ -14,69 +14,65 @@
       <ion-col>{{ data.carnet }}</ion-col>
       <ion-col>{{ data.correo }}</ion-col>
       <ion-col>
-
         <!-- Componentes -->
-        <EditarButton :id=data.carnet />
-        <EliminarButton :id=data.carnet />
-        
+        <EditarButton :id="data.carnet" />
+        <EliminarButton :id="data.carnet" />
       </ion-col>
     </ion-row>
-    <ion-row>
-      
-    </ion-row>
+    <ion-row> </ion-row>
   </ion-grid>
 </template>
 
 <script>
-import {
-
-  IonContent,
-  IonGrid,
-  IonCol,
-  IonRow,
-
-} from "@ionic/vue";
+import { IonContent, IonGrid, IonCol, IonRow } from "@ionic/vue";
 
 import EditarButton from "./EditarButton.vue";
 import EliminarButton from "./EliminarButton.vue";
-
 
 import axios from "axios";
 export default {
   name: "ListaUsuario",
   components: {
-
     IonContent,
     IonGrid,
     IonCol,
     IonRow,
 
-    EditarButton, EliminarButton
+    EditarButton,
+    EliminarButton,
   },
   data() {
     return {
       respuesta: [],
       usuario: {},
+      config: {},
     };
   },
   methods: {
+    async getToken() {
+      let token = await this.$storage.get("token");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      this.getData();
+    },
     getData() {
       this.respuesta = [];
-      axios.get(this.globalVar + "usuario/index").then((response) => {
-        let res = response.data;
-        if (res.code == 200) {
-          this.respuesta = res.data;
-          console.log(this.respuesta);
-        }
-      });
+      axios
+        .get(this.globalVar + "usuario/index", this.config)
+        .then((response) => {
+          let res = response.data;
+          if (res.code == 200) {
+            this.respuesta = res.data;
+            console.log(this.respuesta);
+          }
+        });
     },
-    
   },
   mounted() {
-    this.getData();
-  },
-  ionViewWillEnter() {
-    this.getData();
+    this.getToken();
   },
 };
 </script>

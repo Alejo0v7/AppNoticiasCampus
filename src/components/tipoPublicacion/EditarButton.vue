@@ -82,14 +82,23 @@ export default {
       tipoPublicacion: {},
       Modal: false,
       createOutline,
+      config: {},
     };
   },
   methods: {
+    async getToken() {
+      let token = await this.$storage.get("token");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+    },
     getTipoPublicacion(id) {
       this.Modal = true;
 
       axios
-        .get(this.globalVar + `tipoPublicacion/find/${id}`)
+        .get(this.globalVar + `tipoPublicacion/find/${id}`, this.config)
         .then((response) => {
           this.tipoPublicacion = response.data.data;
           console.log(response);
@@ -102,7 +111,8 @@ export default {
       axios
         .put(
           this.globalVar + `tipoPublicacion/update/${id}`,
-          this.tipoPublicacion
+          this.tipoPublicacion,
+          this.config
         )
         .then((response) => {
           this.tipoPublicacion = response.data.data;
@@ -112,6 +122,9 @@ export default {
         })
         .catch((error) => console.log("Ha ocurrido un error" + error));
     },
+  },
+  mounted() {
+    this.getToken();
   },
 };
 </script>

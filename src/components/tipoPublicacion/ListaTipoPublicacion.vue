@@ -43,25 +43,34 @@ export default {
   data() {
     return {
       respuesta: [],
+      config: {},
     };
   },
   methods: {
+    async getToken() {
+      let token = await this.$storage.get("token");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      this.getData();
+    },
     getData() {
       this.respuesta = [];
-      axios.get(this.globalVar + "tipoPublicacion/index").then((response) => {
-        let res = response.data;
-        if (res.code == 200) {
-          this.respuesta = res.data;
-          console.log(this.respuesta);
-        }
-      });
+      axios
+        .get(this.globalVar + "tipoPublicacion/index", this.config)
+        .then((response) => {
+          let res = response.data;
+          if (res.code == 200) {
+            this.respuesta = res.data;
+            console.log(this.respuesta);
+          }
+        });
     },
   },
   mounted() {
-    this.getData();
-  },
-  ionViewWillEnter() {
-    this.getData();
+    this.getToken();
   },
 };
 </script>

@@ -12,19 +12,31 @@
         </ion-toolbar>
       </ion-header>
 
-      <h2>Perfil</h2>
       <!-- Componentes -->
-
+      <perfil-view />
     </ion-content>
   </ion-page>
 </template>
 
-<script >
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+<script>
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+} from "@ionic/vue";
+import PerfilView from "@/components/perfil/PerfilView.vue";
+
 export default {
-  name:'Tab3Page',
-  components:{
-    IonPage, IonHeader, IonToolbar, IonTitle, IonContent 
-  }
-}
+  name: "Tab3Page",
+  components: {
+    IonPage,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    PerfilView,
+  },
+};
 </script>

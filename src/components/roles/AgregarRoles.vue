@@ -72,6 +72,7 @@ export default {
       respuesta: [],
       roles: {},
       modalDos: false,
+      config: {},
     };
   },
   methods: {
@@ -80,33 +81,45 @@ export default {
       this.roles = {};
       this.modalDos = true;
     },
+    async getToken() {
+      let token = await this.$storage.get("token");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      this.getData();
+      console.log(this.config);
+    },
 
     getData() {
       this.respuesta = [];
-      axios.get(this.globalVar + "tipoUsuario/index").then((response) => {
-        let res = response.data;
-        if (res.code == 200) {
-          this.respuesta = res.data;
-          console.log(this.respuesta);
-        }
-      });
+      axios
+        .get(this.globalVar + "tipoUsuario/index", this.config)
+        .then((response) => {
+          let res = response.data;
+          if (res.code == 200) {
+            this.respuesta = res.data;
+            console.log(this.respuesta);
+          }
+        });
     },
     getRoles(id) {
       this.Modal = true;
 
       axios
-        .get(this.globalVar + `tipoUsuario/find/${id}`)
+        .get(this.globalVar + `tipoUsuario/find/${id}`, this.config)
         .then((response) => {
           this.roles = response.data.data;
           console.log(response);
         })
         .catch((error) => console.log("Ha ocurrido un error" + error));
     },
-    agregarRol() {
+   agregarRol() {
       // Petición para insertar datos
-      console.log(this.roles);
+      console.log(this.$storage.get("token"));
       axios
-        .post(this.globalVar + "tipoUsuario/store", this.roles)
+        .post(this.globalVar + "tipoUsuario/store", this.roles, this.config)
         .then((response) => {
           let res = response.data;
           this.roles = {};
@@ -119,11 +132,9 @@ export default {
         .catch((error) => console.log("Ha ocurrido un error" + error));
     },
   },
+
   mounted() {
-    this.getData();
-  },
-  ionViewWillEnter() {
-    this.getData();
+    this.getToken();
   },
 };
 </script>

@@ -30,21 +30,37 @@
         <ion-col size="12">
           {{ descripcion }}
         </ion-col>
-        <ion-col v-if="tipo == 'Evento' || tipo == 'evento' || tipo == 'EVENTO'">
+        <ion-col
+          v-if="tipo == 'Evento' || tipo == 'evento' || tipo == 'EVENTO'"
+        >
           <b>Fecha de evento: {{ fecha }}</b>
         </ion-col>
       </ion-row>
       <ion-row class="ion-align-items-center">
         <ion-col size="10">
           <!-- Boton de comentarios -->
-          <ion-button @click="getPublicacion(id)" size="small" shape="round" color="medium" fill="outline" expand="block">
+          <ion-button
+            @click="getPublicacion(id)"
+            size="small"
+            shape="round"
+            color="medium"
+            fill="outline"
+            expand="block"
+          >
             <ion-icon slot="start" :icon="chatboxOutline"></ion-icon>
             Comentarios
           </ion-button>
         </ion-col>
         <ion-col size="2">
           <!-- Boton de compartir -->
-          <ion-button @click="" size="small" shape="round" color="medium" fill="outline" expand="block">
+          <ion-button
+            @click=""
+            size="small"
+            shape="round"
+            color="medium"
+            fill="outline"
+            expand="block"
+          >
             <ion-icon slot="icon-only" :icon="arrowRedoOutline"></ion-icon>
           </ion-button>
         </ion-col>
@@ -76,8 +92,10 @@
           </ion-row>
           <ion-row class="ion-align-items-center">
             <ion-col>
-              <b v-if="publicacion.destacado">DESTACADO</b> #{{ publicacion.tipo_publicacion }} #{{ publicacion.categoria
+              <b v-if="publicacion.destacado">DESTACADO</b> #{{
+                publicacion.tipo_publicacion
               }}
+              #{{ publicacion.categoria }}
             </ion-col>
           </ion-row>
           <ion-row class="ion-align-items-center">
@@ -96,97 +114,155 @@
               {{ publicacion.descripcion }}
             </ion-col>
             <ion-col
-              v-if="publicacion.tipo_publicacion == 'Evento' || publicacion.tipo_publicacion == 'evento' || publicacion.tipo_publicacion == 'EVENTO'">
+              v-if="
+                publicacion.tipo_publicacion == 'Evento' ||
+                publicacion.tipo_publicacion == 'evento' ||
+                publicacion.tipo_publicacion == 'EVENTO'
+              "
+            >
               <b>Fecha de evento: {{ publicacion.fecha }}</b>
             </ion-col>
           </ion-row>
           <ion-row class="ion-align-items-center">
             <ion-col>
-              <ion-input color="medium" fill="outline" shape="round" clear-input="true" placeholder="Escribe algo aquí"
-                v-model="comentarios.contenido">
+              <ion-input
+                color="medium"
+                fill="outline"
+                shape="round"
+                clear-input="true"
+                placeholder="Escribe algo aquí"
+                v-model="comentarios.contenido"
+              >
               </ion-input>
             </ion-col>
             <ion-col size="10">
               <!-- Boton de comentarios -->
-              <ion-button size="small" shape="round" color="medium" fill="outline" expand="block"
-                @click="AgregarComentario">
+              <ion-button
+                size="small"
+                shape="round"
+                color="medium"
+                fill="outline"
+                expand="block"
+                @click="AgregarComentario"
+              >
                 <ion-icon slot="start" :icon="chatboxOutline"></ion-icon>
                 Comentar
               </ion-button>
             </ion-col>
             <ion-col size="2">
               <!-- Boton de compartir -->
-              <ion-button @click="" size="small" shape="round" color="medium" fill="outline" expand="block">
+              <ion-button
+                @click=""
+                size="small"
+                shape="round"
+                color="medium"
+                fill="outline"
+                expand="block"
+              >
                 <ion-icon slot="icon-only" :icon="arrowRedoOutline"></ion-icon>
               </ion-button>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-list >
+              <ion-list>
                 <ion-list-header>
                   <ion-label>Comentarios</ion-label>
                 </ion-list-header>
                 <ion-item v-for="(data, i) in respuesta" :key="i">
                   <ion-label>
-                      <ion-grid class="ion-align-items-center">
-                        <ion-row>
-                          <ion-col size="2">
-                            <ion-icon size="large" :icon="personCircleOutline"></ion-icon>
-                          </ion-col>
-                          <ion-col size="8">
-                            {{ data.usuario }} <br>
-                            {{ new Date(data.created_at).toLocaleString() }} 
-                          </ion-col>  
-                          <ion-col size="2">
-                            <ion-fab  vertical="center" horizontal="center" :edge="false" >
-                              <ion-fab-button size="small" shape="round" color="light" fill="outline" >
-                                <ion-icon :icon="ellipsisVerticalOutline" ></ion-icon>
+                    <ion-grid class="ion-align-items-center">
+                      <ion-row>
+                        <ion-col size="2">
+                          <ion-icon
+                            size="large"
+                            :icon="personCircleOutline"
+                          ></ion-icon>
+                        </ion-col>
+                        <ion-col size="8">
+                          {{ data.usuario }} <br />
+                          {{ new Date(data.created_at).toLocaleString() }}
+                        </ion-col>
+                        <ion-col size="2">
+                          <ion-fab
+                            vertical="center"
+                            horizontal="center"
+                            :edge="false"
+                            v-if="this.carnet == data.id_usuario"
+                          >
+                            <ion-fab-button
+                              size="small"
+                              shape="round"
+                              color="light"
+                              fill="outline"
+                            >
+                              <ion-icon
+                                :icon="ellipsisVerticalOutline"
+                              ></ion-icon>
+                            </ion-fab-button>
+                            <ion-fab-list side="start">
+                              <!--Este es-->
+                              <ion-fab-button @click="getComentarios(data.id)">
+                                <ion-icon :icon="createOutline"></ion-icon>
                               </ion-fab-button>
-                              <ion-fab-list side="start">
-                                <ion-fab-button @click="getComentarios(data.id)">
-                                  <ion-icon :icon="createOutline"></ion-icon>
-                                </ion-fab-button>
-                                <ion-fab-button @click="EliminarComentario(data.id)">
-                                  <ion-icon :icon="closeOutline"></ion-icon>
-                                </ion-fab-button>
-                              </ion-fab-list>
-                            </ion-fab>
-                          </ion-col>                        
-                        </ion-row>
-                        <ion-row>
-                          <ion-col  size="8">{{ data.contenido }}</ion-col>
-                        </ion-row>
-
-                      </ion-grid>
+                              <!--Este es-->
+                              <ion-fab-button
+                                @click="EliminarComentario(data.id)"
+                              >
+                                <ion-icon :icon="closeOutline"></ion-icon>
+                              </ion-fab-button>
+                            </ion-fab-list>
+                          </ion-fab>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col size="8">{{ data.contenido }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
                   </ion-label>
-                  
+
                   <!-- MODAL -->
                   <ion-modal :is-open="ModalDos">
                     <ion-header>
                       <ion-toolbar>
                         <ion-title>Editar Comentario</ion-title>
                         <ion-buttons slot="end">
-                          <ion-button @click="ModalDos = false">Cerrar</ion-button>
+                          <ion-button @click="ModalDos = false"
+                            >Cerrar</ion-button
+                          >
                         </ion-buttons>
                       </ion-toolbar>
                     </ion-header>
                     <ion-content class="ion-padding">
-                      <br>
-                      <ion-input color="medium" fill="outline" shape="round" clear-input="true"
-                        placeholder="Escribe algo aquí" v-model="comentarios.contenido">
+                      <br />
+                      <ion-input
+                        color="medium"
+                        fill="outline"
+                        shape="round"
+                        clear-input="true"
+                        placeholder="Escribe algo aquí"
+                        v-model="comentarios.contenido"
+                      >
                       </ion-input>
-                      <br>
-                      <ion-button size="small" shape="round" color="medium" fill="outline" expand="block"
-                        @click="editarComentario(comentarios.id)">
-                        <ion-icon slot="start" :icon="chatboxOutline"></ion-icon>
+                      <br />
+                      <ion-button
+                        size="small"
+                        shape="round"
+                        color="medium"
+                        fill="outline"
+                        expand="block"
+                        @click="editarComentario(comentarios.id)"
+                      >
+                        <ion-icon
+                          slot="start"
+                          :icon="chatboxOutline"
+                        ></ion-icon>
                         Editar
                       </ion-button>
                     </ion-content>
                   </ion-modal>
 
                   <!-- TERMINA MODAL -->
-                  
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -204,7 +280,6 @@ import {
   IonIcon,
   IonImg,
   IonButton,
-
   IonHeader,
   IonToolbar,
   IonTitle,
@@ -212,8 +287,13 @@ import {
   IonModal,
   IonButtons,
   IonInput,
-  IonItem, IonLabel, IonList, IonListHeader,
-  IonFab, IonFabButton, IonFabList,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonFab,
+  IonFabButton,
+  IonFabList,
 } from "@ionic/vue";
 import {
   personCircleOutline,
@@ -256,8 +336,13 @@ export default {
     IonModal,
     IonButtons,
     IonInput,
-    IonItem, IonLabel, IonList, IonListHeader,
-    IonFab, IonFabButton, IonFabList,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonListHeader,
+    IonFab,
+    IonFabButton,
+    IonFabList,
   },
   data() {
     return {
@@ -273,18 +358,33 @@ export default {
       id_usuario: null,
       id_publicacion: null,
       Modal: false,
-      ModalDos: false
+      ModalDos: false,
+      config: {},
+      carnet: null,
+      valida: false,
     };
   },
 
   methods: {
+    async getToken() {
+      let token = await this.$storage.get("token");
+      let car = await this.$storage.get("carnet");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      console.log(this.id_usuario);
+      this.getData();
+      this.carnet = car;
+    },
     getPublicacion(id) {
       this.Modal = true;
       axios
-        .get(this.globalVar + `publicacion/find/${id}`)
+        .get(this.globalVar + `publicacion/find/${id}`, this.config)
         .then((response) => {
           this.publicacion = response.data.data[0];
-          this.id_usuario = 202001
+          this.id_usuario = this.carnet;
           this.id_publicacion = response.data.data[0].id;
           console.log(response);
           this.getData();
@@ -292,22 +392,25 @@ export default {
         .catch((error) => console.log("Ha ocurrido un error" + error));
     },
 
-
     getData() {
       this.respuesta = [];
-      axios.get(this.globalVar + "comentario/index")
+      axios
+        .get(this.globalVar + "comentario/index", this.config)
         .then((response) => {
           let res = response.data;
           if (res.code == 200) {
-            this.respuesta = res.data.filter(comentarios => comentarios.id_publicacion == this.id_publicacion);
+            this.respuesta = res.data.filter(
+              (comentarios) => comentarios.id_publicacion == this.id_publicacion
+            );
             console.log(this.respuesta);
           }
-        });
+        })
+        .catch((error) => console.log("Ha ocurrido un error" + error));
     },
     getComentarios(id) {
-      this.ModalDos = true
+      this.ModalDos = true;
       axios
-        .get(this.globalVar + `comentario/find/${id}`)
+        .get(this.globalVar + `comentario/find/${id}`, this.config)
         .then((response) => {
           this.comentarios = response.data.data;
           console.log(response);
@@ -316,11 +419,15 @@ export default {
     },
     AgregarComentario() {
       // Petición para insertar datos
-      this.comentarios.id_usuario = this.id_usuario
-      this.comentarios.id_publicacion = this.id_publicacion
+      this.comentarios.id_usuario = this.carnet;
+      this.comentarios.id_publicacion = this.id_publicacion;
       console.log(this.comentarios);
       axios
-        .post(this.globalVar + "comentario/store", this.comentarios)
+        .post(
+          this.globalVar + "comentario/store",
+          this.comentarios,
+          this.config
+        )
         .then((response) => {
           let res = response.data;
           this.comentarios = {};
@@ -333,32 +440,36 @@ export default {
         .catch((error) => console.log("Ha ocurrido un error" + error));
     },
     editarComentario(id) {
-      this.ModalDos = false
+      this.ModalDos = false;
 
-      axios.put(this.globalVar + `comentario/update/${id}`, this.comentarios)
-        .then(response => {
-          this.comentarios = response.data.data
-          console.log('Editado')
-          console.log(response)
+      axios
+        .put(
+          this.globalVar + `comentario/update/${id}`,
+          this.comentarios,
+          this.config
+        )
+        .then((response) => {
+          this.comentarios = response.data.data;
+          console.log("Editado");
+          console.log(response);
           this.getData();
-
         })
-        .catch(error => console.log('Ha ocurrido un error' + error))
+        .catch((error) => console.log("Ha ocurrido un error" + error));
     },
     EliminarComentario(id) {
-        axios.delete(this.globalVar+`comentario/delete/${id}`)
-            .then(response => {
-                console.log(response)
-                console.log('Comentario Eliminado')
-                this.getData();
-
-            })
-            .catch(error => console.log('Ha ocurrido un error' + error))
-        },
+      axios
+        .delete(this.globalVar + `comentario/delete/${id}`, this.config)
+        .then((response) => {
+          console.log(response);
+          console.log("Comentario Eliminado");
+          this.getData();
+        })
+        .catch((error) => console.log("Ha ocurrido un error" + error));
+    },
   },
 
-  ionViewWillEnter() {
-    this.getData();
+  mounted() {
+    this.getToken();
   },
 };
 </script>

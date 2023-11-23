@@ -72,9 +72,19 @@ export default {
       respuesta: [],
       tipoPublicacion: {},
       modalDos: false,
+      config: {},
     };
   },
   methods: {
+    async getToken() {
+      let token = await this.$storage.get("token");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      this.getData();
+    },
     // MODAL
     OpenMdos() {
       this.tipoPublicacion = {};
@@ -83,19 +93,21 @@ export default {
 
     getData() {
       this.respuesta = [];
-      axios.get(this.globalVar + "tipoPublicacion/index").then((response) => {
-        let res = response.data;
-        if (res.code == 200) {
-          this.respuesta = res.data;
-          console.log(this.respuesta);
-        }
-      });
+      axios
+        .get(this.globalVar + "tipoPublicacion/index", this.config)
+        .then((response) => {
+          let res = response.data;
+          if (res.code == 200) {
+            this.respuesta = res.data;
+            console.log(this.respuesta);
+          }
+        });
     },
     getTipoPublicacion(id) {
       this.Modal = true;
 
       axios
-        .get(this.globalVar + `tipoPublicacion/find/${id}`)
+        .get(this.globalVar + `tipoPublicacion/find/${id}`, this.config)
         .then((response) => {
           this.tipoPublicacion = response.data.data;
           console.log(response);
@@ -105,7 +117,11 @@ export default {
     agregarTipoPublicacion() {
       console.log(this.tipoPublicacion);
       axios
-        .post(this.globalVar + "tipoPublicacion/store", this.tipoPublicacion)
+        .post(
+          this.globalVar + "tipoPublicacion/store",
+          this.tipoPublicacion,
+          this.config
+        )
         .then((response) => {
           let res = response.data;
           this.tipoPublicacion = {};
@@ -119,10 +135,7 @@ export default {
     },
   },
   mounted() {
-    this.getData();
-  },
-  ionViewWillEnter() {
-    this.getData();
+    this.getToken();
   },
 };
 </script>

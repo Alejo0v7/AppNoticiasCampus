@@ -24,12 +24,21 @@ export default {
   data() {
     return {
       closeOutline,
+      config: {},
     };
   },
   methods: {
+    async getToken() {
+      let token = await this.$storage.get("token");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+    },
     deleteTipoPublicacion(id) {
       axios
-        .delete(this.globalVar + `tipoPublicacion/delete/${id}`)
+        .delete(this.globalVar + `tipoPublicacion/delete/${id}`, this.config)
         .then((response) => {
           console.log(response);
           console.log("Tipo de Publicacion Eliminado");
@@ -37,6 +46,9 @@ export default {
         })
         .catch((error) => console.log("Ha ocurrido un error" + error));
     },
+  },
+  mounted() {
+    this.getToken();
   },
 };
 </script>

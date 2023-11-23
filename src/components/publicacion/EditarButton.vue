@@ -202,13 +202,23 @@ export default {
       publicacion: {},
       categorias: {},
       tipoPublicacion: {},
+      config: {},
     };
   },
   methods: {
+    async getToken() {
+      let token = await this.$storage.get("token");
+      this.config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      this.getCategorias(), this.getTipoPublicacion();
+    },
     getPublicacion(id) {
       this.Modal = true;
       axios
-        .get(this.globalVar + `publicacion/find/${id}`)
+        .get(this.globalVar + `publicacion/find/${id}`, this.config)
         .then((response) => {
           this.publicacion = response.data.data[0];
           console.log(response);
@@ -234,7 +244,11 @@ export default {
       }
 
       axios
-        .put(this.globalVar + `publicacion/update/${id}`, this.publicacion)
+        .put(
+          this.globalVar + `publicacion/update/${id}`,
+          this.publicacion,
+          this.config
+        )
         .then((response) => {
           this.publicacion = response.data.data;
           console.log("Editado");
@@ -248,7 +262,7 @@ export default {
     getCategorias() {
       this.categorias = {};
       axios
-        .get(this.globalVar + "categoria/index")
+        .get(this.globalVar + "categoria/index", this.config)
         .then((response) => {
           let res = response.data;
           if (res.code == 200) {
@@ -261,7 +275,7 @@ export default {
     getTipoPublicacion() {
       this.tipoPublicacion = {};
       axios
-        .get(this.globalVar + "tipoPublicacion/index")
+        .get(this.globalVar + "tipoPublicacion/index", this.config)
         .then((response) => {
           let res = response.data;
           if (res.code == 200) {
@@ -273,7 +287,7 @@ export default {
     },
   },
   mounted() {
-    this.getCategorias(), this.getTipoPublicacion();
+    this.getToken();
   },
 };
 </script>
